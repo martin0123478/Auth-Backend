@@ -91,15 +91,22 @@ const login = async (req, res = response) =>{
   
 }
 
-const token = (req, res) =>{
+
+const revalidarToken =async (req, res=response) =>{
+  const {uid,name} = req
+  //jwt
+  const token = await generarJWT(uid,name)
   return res.json({
     ok:true,
-    msg:'renew'
+    uid,
+    name,
+    token
+    
   })
 }
 
 module.exports = {
   crearUsuario,
   login,
-  token
+  revalidarToken
 }
